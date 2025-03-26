@@ -1,0 +1,268 @@
+/* ==================== */
+/* ESTILOS BASE GENERALES */
+/* ==================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ==================== */
+/* LAYOUTS PRINCIPALES */
+/* ==================== */
+.screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #FFF8E1;
+}
+
+.content-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+}
+
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #FFF8E1;
+    overflow: hidden;
+}
+
+/* ==================== */
+/* COMPONENTES DE FORMULARIO */
+/* ==================== */
+.form-group {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 80%;
+    max-width: 300px;
+}
+
+/* ==================== */
+/* COMPONENTES DE JUEGO */
+/* ==================== */
+.target {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 11;
+}
+
+.fly {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: black;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+#timer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* ==================== */
+/* BOTONES Y CONTROLES */
+/* ==================== */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+}
+
+/* Botones base */
+.btn-action {
+    display: inline-block;
+    background: #4CAF50;
+    color: white;
+    padding: 12px 25px;
+    margin: 20px 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all .3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    cursor: default;
+}
+
+.color-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: all 0.3s;
+}
+
+/* Estados de botones */
+.btn-action:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn-action:active,
+.btn-action.pressed {
+    transform: scale(0.95) !important;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3) !important;
+    transition: all 0.1s ease;
+}
+
+.color-btn.selected {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    opacity: 1 !important;
+}
+
+.color-btn.correct {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.7);
+}
+
+.color-btn.incorrect {
+    box-shadow: 0 0 20px rgba(255, 82, 82, 0.7);
+}
+
+/* ==================== */
+/* PALETA DE COLORES */
+/* ==================== */
+/* Rojo */
+.target.red, 
+.color-btn.red, 
+.key.red, 
+.btn-action.red {
+    background: #FF5252;
+}
+
+.btn-action.red:hover {
+    background: #e53935;
+}
+
+.btn-action.red:active,
+.btn-action.red.pressed {
+    background: #e53935 !important;
+}
+
+/* Verde */
+.target.green, 
+.color-btn.green, 
+.key.green, 
+.btn-action.green {
+    background: #4CAF50;
+}
+
+.btn-action.green:hover {
+    background: #43A047;
+}
+
+.btn-action.green:active,
+.btn-action.green.pressed {
+    background: #43A047 !important;
+}
+
+/* Amarillo */
+.target.yellow, 
+.color-btn.yellow, 
+.key.yellow {
+    background: #FFD600;
+}
+
+/* Azul */
+.target.blue, 
+.color-btn.blue, 
+.key.blue {
+    background: #2196F3;
+}
+
+/* ==================== */
+/* COMPONENTES DE INTERFAZ */
+/* ==================== */
+#key-instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 500px;
+}
+
+.key {
+    display: inline-block;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    margin: 0 5px;
+    font-weight: bold;
+}
+
+.final-instructions {
+    margin: 20px 0;
+    font-size: 20px;
+    text-align: center;
+}
+
+.tie-message {
+    color: #FF9800;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+/* ==================== */
+/* CLASES UTILITARIAS */
+/* ==================== */
+.success { color: green; }
+.error { color: red; }

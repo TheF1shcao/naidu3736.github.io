@@ -1,0 +1,113 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFF8E1; /* Fondo crema claro como en registro.css */
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Círculos de colores con estilo del proyecto */
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.9;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.circle:active {
+    transform: scale(0.95);
+}
+
+.red {
+    background-color: #FF5252; /* Rojo del proyecto */
+    width: 450px;
+    height: 450px;
+    top: -50px;
+    left: -50px;
+}
+
+.yellow {
+    background-color: #FFD600; /* Amarillo del proyecto */
+    width: 500px;
+    height: 500px;
+    bottom: -80px;
+    left: 50px;
+}
+
+.green {
+    background-color: #4CAF50; /* Verde del proyecto */
+    width: 550px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.blue {
+    background-color: #2196F3; /* Azul del proyecto */
+    width: 480px;
+    height: 480px;
+    right: -50px;
+    top: 100px;
+}
+
+/* Texto central */
+.text {
+    position: absolute;
+    text-align: center;
+    color: #333; /* Color de texto oscuro */
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    max-width: 80%;
+}
+
+.text h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.text p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* Instrucciones */
+.instructions {
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+    z-index: 10;
+}

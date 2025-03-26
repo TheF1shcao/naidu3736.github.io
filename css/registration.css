@@ -1,0 +1,223 @@
+/* Estilos específicos para la pantalla de registro */
+.screen-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #FFF8E1;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-group {
+    margin: 25px 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.form-group input {
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 300px;
+    transition: border-color 0.3s;
+    margin: 0 auto;
+    display: block;
+}
+
+.form-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+    width: 80%;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.color-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 16px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    width: 100%;
+}
+
+.color-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.color-btn:disabled {
+    opacity: 0.6 !important;
+    transform: none !important;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+}
+
+.color-btn.red { background: #FF5252; }
+.color-btn.green { background: #4CAF50; }
+.color-btn.blue { background: #2196F3; }
+.color-btn.yellow { background: #FFD600; }
+
+/* Botón Comenzar con distribución rectangular perfecta */
+#start-btn {
+    position: relative;
+    padding: 0;
+    font-size: 18px;
+    color: #333;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 1;
+    margin: 30px auto 0;
+    width: 80%;
+    max-width: 300px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Distribución rectangular 2x2 */
+#start-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: 
+        /* Fila superior */
+        linear-gradient(to right, 
+            #FF5252 0%, #FF5252 50%, 
+            #4CAF50 50%, #4CAF50 100%),
+        /* Fila inferior */
+        linear-gradient(to right, 
+            #FFD600 0%, #FFD600 50%, 
+            #2196F3 50%, #2196F3 100%);
+    background-size: 100% 50%;
+    background-repeat: no-repeat;
+    background-position: 
+        0 0,    /* Fila superior */
+        0 100%; /* Fila inferior */
+    z-index: -1;
+    border-radius: 8px;
+}
+
+/* Texto del botón centrado */
+.btn-text {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 4px;
+    text-align: center;
+    width: 100%;
+}
+
+.btn-subtext {
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+/* Efecto hover */
+#start-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* Efecto al presionar */
+#start-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+/* Estilo deshabilitado */
+#start-btn:disabled {
+    background: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+#start-btn:disabled::before {
+    opacity: 0.5;
+}
+
+/* Estilos para estado bloqueado */
+.gender-locked {
+    pointer-events: none;
+}
+
+#name:disabled {
+    background-color: transparent;
+    border: 2px solid #4CAF50;
+}
+
+.selected {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 3px rgba(0,0,0,0.1);
+}
+
+/* Estilo para la combinación activa */
+.color-btn.combo-active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 15px rgba(0,0,0,0.7);
+    filter: brightness(1.2);
+}
+
+/* Efecto cuando se activa */
+#start-btn.active-combo {
+    animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+[data-gender] {
+    pointer-events: none; /* Bloquea interacción por mouse */
+    cursor: default !important; /* Oculta el cursor de mano */
+    transition: opacity 0.3s; /* Para el efecto visual */
+}
+
+.combo-active {
+    transform: scale(0.95);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}

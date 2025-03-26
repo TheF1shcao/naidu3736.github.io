@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/registration.css">
+</head>
+<body class="screen-container">
+    <div class="content-box">
+        <h1>¡Bienvenido!</h1>
+        
+        <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input type="text" id="name" placeholder="Tu nombre" autofocus>
+        </div>
+        
+        <div class="form-group">
+            <label>Género</label>
+            <div class="options">
+                <button class="color-btn red" data-gender="el" data-key="1">Él</button>
+                <button class="color-btn green" data-gender="ella" data-key="2">Ella</button>
+                <button class="color-btn blue" data-gender="elle" data-key="3">Elle</button>
+                <button class="color-btn yellow" data-gender="otro" data-key="4">Otro</button>
+            </div>
+        </div>
+        
+        <button id="start-btn" disabled>
+            <span class="btn-text">¡Comenzar!</span>
+        </button>
+    </div>
+
+    <script src="js/Player.js"></script>
+    <script src="js/Registration.js"></script>
+</body>
+</html>
