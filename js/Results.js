@@ -48,10 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
             case '4': // Compartir (azul)
                 if (shareBtn) {
                     shareBtn.classList.add('pressed');
+                    setTimeout(() => {
+                        captureAndShareResults();
+                    }, 200);
                 }
-                setTimeout(() => {
-                    shareResults();
-                }, 200);
                 break;
         }
     });
@@ -112,24 +112,60 @@ function generateFinalMessage(score) {
 }
 
 /**
- * Comparte los resultados usando la Web Share API o copia al portapapeles
+ * Captura y comparte los resultados como imagen
  */
-function shareResults() {
-    const player = Player.loadFromLocalStorage();
-    const text = `¡He completado los juegos con ${player.totalScore} puntos!`;
+function captureAndShareResults() {
+    const resultsContainer = document.querySelector('.content-box');
     
-    if (navigator.share) {
-        navigator.share({
-            title: 'Mis resultados',
-            text: text,
-            url: window.location.href
-        }).catch(err => {
-            console.log('Error al compartir:', err);
-            copyToClipboard(text);
-        });
-    } else {
-        copyToClipboard(text);
-    }
+    // Configuración para html2canvas
+    const options = {
+        scale: 2, // Mayor calidad
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#FFF8E1', // Mismo color que el fondo
+        windowWidth: resultsContainer.scrollWidth,
+        windowHeight: resultsContainer.scrollHeight
+    };
+    
+    html2canvas(resultsContainer, options).then(canvas => {
+        // Convertir canvas a blob
+        canvas.toBlob(blob => {
+            const player = Player.loadFromLocalStorage();
+            const fileName = `resultados_${player.name.replace(/\s+/g, '_')}.png`;
+            const file = new File([blob], fileName, { type: 'image/png' });
+            
+            // Intentar usar la Web Share API
+            if (navigator.share && navigator.canShare({ files: [file] })) {
+                navigator.share({
+                    title: `Resultados de ${player.name}`,
+                    text: `¡Obtuve ${player.totalScore} puntos en los juegos!`,
+                    files: [file]
+                }).catch(err => {
+                    console.log('Error al compartir:', err);
+                    fallbackSaveImage(canvas, fileName);
+                });
+            } else {
+                fallbackSaveImage(canvas, fileName);
+            }
+        }, 'image/png', 1);
+    });
+}
+
+/**
+ * Método alternativo para guardar la imagen
+ */
+function fallbackSaveImage(canvas, fileName) {
+    // Crear enlace de descarga
+    const link = document.createElement('a');
+    link.download = fileName;
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    // Mostrar mensaje al usuario
+    alert('Captura de resultados guardada. Puedes compartirla desde tu galería.');
 }
 
 /**
