@@ -2,22 +2,25 @@ class Fly {
     constructor(target) {
         this.target = target;
         this.element = this.createFlyElement();
+        this.lastAnimationTime = Date.now();  // Para deltaTime
         this.animate();
     }
 
     createFlyElement() {
         const fly = document.createElement('div');
         fly.className = 'fly';
-        
         const gameContainer = document.getElementById('game-container');
         fly.style.left = `${Math.random() * 100}%`;
         fly.style.top = `100%`;
-        
         gameContainer.appendChild(fly);
         return fly;
     }
 
     animate() {
+        const currentTime = Date.now();
+        const deltaTime = currentTime - this.lastAnimationTime;
+        this.lastAnimationTime = currentTime;
+
         const gameContainer = document.getElementById('game-container');
         const containerRect = gameContainer.getBoundingClientRect();
         const targetRect = this.target.element.getBoundingClientRect();
@@ -30,13 +33,12 @@ class Fly {
         
         const dx = targetX - currentX;
         const dy = targetY - currentY;
-        
         const distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance > 1) {
-            // Aumentamos el factor de movimiento de 0.02 a 0.05 para mayor velocidad
-            this.element.style.left = `${currentX + dx * 0.03}%`;
-            this.element.style.top = `${currentY + dy * 0.03}%`;
+            const speed = 0.03 * (deltaTime / 16.67); // Normalizado a 60 FPS
+            this.element.style.left = `${currentX + dx * speed}%`;
+            this.element.style.top = `${currentY + dy * speed}%`;
             requestAnimationFrame(() => this.animate());
         } else {
             this.target.incrementCount();
