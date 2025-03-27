@@ -138,6 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Guarda el jugador en localStorage
         player.saveToLocalStorage();
         // Redirige a la pantalla de inicio del juego
-        // window.location.href = "games/flies/flies_start.html";
+        window.location.href = "games/flies/flies_start.html";
     }
 });
